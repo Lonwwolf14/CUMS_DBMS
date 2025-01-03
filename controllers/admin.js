@@ -2,9 +2,9 @@ const mysql = require('mysql');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const uuidv4 = require('uuid').v4;
-const mailgun = require('mailgun-js');
+// const mailgun = require('mailgun-js');
 const DOMAIN = process.env.DOMAIN_NAME;
-const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN });
+// const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN });
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,

@@ -2,9 +2,9 @@ const mysql = require('mysql');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-const mailgun = require('mailgun-js');
+// const mailgun = require('mailgun-js');
 const DOMAIN = process.env.DOMAIN_NAME;
-const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN });
+// const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN });
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -301,20 +301,20 @@ exports.forgotPassword = async (req, res, next) => {
   };
 
   const sql2 = 'UPDATE student SET resetLink = ? WHERE email = ?';
-  db.query(sql2, [token, email], (err, success) => {
-    if (err) {
-      errors.push({ msg: 'Error In ResetLink' });
-      res.render('Student/forgotPassword', { errors });
-    } else {
-      mg.messages().send(data, (err, body) => {
-        if (err) throw err;
-        else {
-          req.flash('success_msg', 'Reset Link Sent Successfully!');
-          res.redirect('/student/forgot-password');
-        }
-      });
-    }
-  });
+  // db.query(sql2, [token, email], (err, success) => {
+  //   if (err) {
+  //     errors.push({ msg: 'Error In ResetLink' });
+  //     res.render('Student/forgotPassword', { errors });
+  //   } else {
+  //     mg.messages().send(data, (err, body) => {
+  //       if (err) throw err;
+  //       else {
+  //         req.flash('success_msg', 'Reset Link Sent Successfully!');
+  //         res.redirect('/student/forgot-password');
+  //       }
+  //     });
+  //   }
+  // });
 };
 
 exports.getResetPassword = (req, res, next) => {
